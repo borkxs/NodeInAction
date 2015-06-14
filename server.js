@@ -45,7 +45,6 @@ function serveStatic(response, cache, absPath) {
 }
 
 function sendFile(response, filePath, fileContents) {
-    console.log(mime.lookup(path.basename(filePath)))
     response.writeHead(200, {
         'Content-Type': mime.lookup(path.basename(filePath))
     })
