@@ -3,13 +3,24 @@ var socket = io.connect()
 $(document).ready(function() {
     var chatApp = new Chat(socket)
 
-        socket.on('nameResult', function(result) {
+    socket.on('nameResult', function(result) {
         var message
 
         if (result.success)
             message = 'You are now known as ' + result.name + '.'
         else
             message = result.message
+
+        $('#messages').append(divSystemContentElement(message))
+    })
+
+    socket.on('featureResult', function(result){
+        var message
+
+        if (result.success)
+            message = 'Feature Request: ' + message + '.'
+        else
+            mesage = result.message
 
         $('#messages').append(divSystemContentElement(message))
     })
