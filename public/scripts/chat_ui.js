@@ -15,7 +15,6 @@ $(document).ready(function() {
     })
 
     socket.on('featureResult', function(result){
-        console.log('featureResult', result)
         var message
 
         if (result.success)
@@ -23,7 +22,7 @@ $(document).ready(function() {
         else
             mesage = result.message
 
-        $('#messages').append(divSystemContentElement(message))
+        $('#messages').append(divEscapedSystemContent(message))
     })
 
     socket.on('joinResult', function(result) {
@@ -67,7 +66,9 @@ $(document).ready(function() {
 function divEscapedContentElement(message) {
     return $('<div></div>').text(message)
 }
-
+function divEscapedSystemContent(message) {
+    return $('<div></div>').append( $('<i></i>').text(message) )
+}
 function divSystemContentElement(message) {
     return $('<div></div>').html('<i>' + message + '</i>')
 }
@@ -78,13 +79,25 @@ function processUserInput(chatApp, socket) {
 
     if (message.charAt(0) == '$') {
         systemMessage = chatApp.processCommand(message)
-        if (systemMessage)
+        if (systemMessage) {
             $('#message').append(divSystemContentElement(systemMessage))
+            scrollToBottom()
+        } else {
+            normalMessage(message)
+        }
     } else {
+        normalMessage(message)
+    }
+
+    function normalMessage(message){
         chatApp.sendMessage($('#room').text(), message)
         $('#messages').append(divEscapedContentElement(message))
-        $('#messages').scrollTop($('#messages').prop('scrollHeight'))
+        scrollToBottom()
     }
 
     $('#send-message').val('')
+}
+
+function scrollToBottom(){
+    $('#messages').scrollTop($('#messages').prop('scrollHeight'))
 }
