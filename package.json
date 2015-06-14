@@ -1,0 +1,9 @@
+{
+  "name": "NodeInActionChapterTwo",
+  "version": "0.0.1",
+  "description": "Example real time chat application from Node: In Action",
+  "dependencies": {
+  	"mime": "*",
+  	"socket.io": "*"
+  }
+}
