@@ -38,7 +38,7 @@ Chat.prototype.processCommand = function(command) {
 
         case 'feature':
             words.shift()
-            var message = words.join(' ')
+            message = words.join(' ')
             this.socket.emit('featureRequest', message)
 
         default:
