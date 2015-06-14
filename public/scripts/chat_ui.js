@@ -22,9 +22,6 @@ $(document).ready(function() {
     socket.on('message', function(message) {
         var newElement = $('<div></div>').text(message.text)
         $('#messages').append(newElement)
-
-        console.log( "$('#messages').prop('scrollHeight')", $('#messages').prop('scrollHeight') )
-
         $('#messages').scrollTop($('#messages').prop('scrollHeight'))
     })
 
@@ -75,9 +72,6 @@ function processUserInput(chatApp, socket) {
         chatApp.sendMessage($('#room').text(), message)
         $('#messages').append(divEscapedContentElement(message))
         $('#messages').scrollTop($('#messages').prop('scrollHeight'))
-
-        console.log( "$('#messages').prop('scrollHeight')", $('#messages').prop('scrollHeight') )
-        console.log( "$('#messages').prop('scrollHeight')", $('#messages').prop('scrollTop') )
     }
 
     $('#send-message').val('')
