@@ -3,7 +3,7 @@ var socket = io.connect()
 $(document).ready(function() {
     var chatApp = new Chat(socket)
 
-    socket.on('nameResult', function(result) {
+        socket.on('nameResult', function(result) {
         var message
 
         if (result.success)
@@ -22,6 +22,9 @@ $(document).ready(function() {
     socket.on('message', function(message) {
         var newElement = $('<div></div>').text(message.text)
         $('#messages').append(newElement)
+
+        console.log( "$('#messages').prop('scrollHeight')", $('#messages').prop('scrollHeight') )
+
         $('#messages').scrollTop($('#messages').prop('scrollHeight'))
     })
 
@@ -72,6 +75,9 @@ function processUserInput(chatApp, socket) {
         chatApp.sendMessage($('#room').text(), message)
         $('#messages').append(divEscapedContentElement(message))
         $('#messages').scrollTop($('#messages').prop('scrollHeight'))
+
+        console.log( "$('#messages').prop('scrollHeight')", $('#messages').prop('scrollHeight') )
+        console.log( "$('#messages').prop('scrollHeight')", $('#messages').prop('scrollTop') )
     }
 
     $('#send-message').val('')
