@@ -6,7 +6,7 @@ $(document).ready(function() {
     socket.on('nameResult', function(result) {
         var message
 
-        if (result.sucess)
+        if (result.success)
             message = 'You are now known as ' + result.name + '.'
         else
             message = result.message
@@ -19,16 +19,17 @@ $(document).ready(function() {
         $('#messages').append(divSystemContentElement('Room changed.'))
     })
 
-    socket.on('message', function (message) {
+    socket.on('message', function(message) {
         var newElement = $('<div></div>').text(message.text)
-        $('#mssages').append(newElement)
+        $('#messages').append(newElement)
+        $('#messages').scrollTop($('#messages').prop('scrollHeight'))
     })
 
-    socket.on('rooms', function (rooms) {
+    socket.on('rooms', function(rooms) {
         $('#room-list').empty()
 
-        for(var room in rooms) {
-            room = room.ubstring(1, room.length)
+        for (var room in rooms) {
+            room = room.substring(1, room.length)
             if (room != '')
                 $('#room-list').append(divEscapedContentElement(room))
         }
@@ -66,7 +67,7 @@ function processUserInput(chatApp, socket) {
     if (message.charAt(0) == '/') {
         systemMessage = chatApp.processCommand(message)
         if (systemMessage)
-            $('#message').append(divSystemContentElement)
+            $('#message').append(divSystemContentElement(systemMessage))
     } else {
         chatApp.sendMessage($('#room').text(), message)
         $('#messages').append(divEscapedContentElement(message))

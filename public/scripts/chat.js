@@ -16,8 +16,8 @@ Chat.prototype.changeRoom = function(room) {
     })
 }
 
-Chat.prootypeprocessCommand = function(command) {
-    var world = command.split(' '),
+Chat.prototype.processCommand = function(command) {
+    var words = command.split(' '),
         command = words[0]
             .substring(1, words[0].length)
             .toLowerCase(),
@@ -30,11 +30,11 @@ Chat.prootypeprocessCommand = function(command) {
             this.changeRoom(room)
             break
 
-        case 'nick'
-        words.shift()
-        var name = words.join(' ')
-        this.socket.emit('nameAttempt', name)
-        break
+        case 'nick':
+            words.shift()
+            var name = words.join(' ')
+            this.socket.emit('nameAttempt', name)
+            break
 
         default:
             message = 'Unrecognized command.'
