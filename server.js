@@ -5,7 +5,7 @@ var http = require('http'),
 
 var cache = {}
 
-var server = http.createServer(function (request, response) {
+var server = http.createServer(function(request, response) {
     var filePath = false,
         absPath
 
@@ -18,7 +18,7 @@ var server = http.createServer(function (request, response) {
     serveStatic(response, cache, absPath)
 })
 
-server.listen(3000, function () {
+server.listen(3000, function() {
     console.log("Server listening on port 3000.")
 })
 
