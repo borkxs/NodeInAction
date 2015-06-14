@@ -64,7 +64,7 @@ function processUserInput(chatApp, socket) {
     var message = $('#send-message').val(),
         systemMessage
 
-    if (message.charAt(0) == '/') {
+    if (message.charAt(0) == '$') {
         systemMessage = chatApp.processCommand(message)
         if (systemMessage)
             $('#message').append(divSystemContentElement(systemMessage))
