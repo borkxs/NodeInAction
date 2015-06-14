@@ -1,11 +1,15 @@
-var canadianDollar = 0.91
+var Currency = function(canadianDollar) {
+    this.canadianDollar = canadianDollar;
+}
 
-function roundTwoDecimals(amount) {
+Currency.prototype.roundTwoDecimals = function (amount) {
     return Math.round(amount * 100) / 100
 }
-exports.canadianToUS = function(canadian) {
-    return roundTwoDecimals(canadian * canadianDollar)
+Currency.prototype.canadianToUS = function(canadian) {
+    return this.roundTwoDecimals(canadian * this.canadianDollar)
 }
-exports.USToCanadian = function(us) {
-    return roundTwoDecimals(us / canadianDollar)
+Currency.prototype.USToCanadian = function(us) {
+    return this.roundTwoDecimals(us / this.canadianDollar)
 }
+
+module.exports = Currency
