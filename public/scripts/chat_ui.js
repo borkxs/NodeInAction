@@ -11,10 +11,11 @@ $(document).ready(function() {
         else
             message = result.message
 
-        $('#messages').append(divSystemContentElement(message))
+        $('#messages').append(divEscapedContentElement(message))
     })
 
     socket.on('featureResult', function(result){
+        console.log('featureResult', result)
         var message
 
         if (result.success)
