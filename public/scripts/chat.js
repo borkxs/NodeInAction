@@ -34,6 +34,7 @@ Chat.prototype.processCommand = function(command) {
             words.shift()
             var name = words.join(' ')
             this.socket.emit('nameAttempt', name)
+            message = true
             break
 
         case 'feature':

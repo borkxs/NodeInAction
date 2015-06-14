@@ -34,8 +34,8 @@ $(document).ready(function() {
     })
 
     socket.on('message', function(message) {
-        var newElement = $('<div></div>').text(message.text)
-        $('#messages').append(newElement)
+        // var newElement = $('<div></div>').text(message.text)
+        $('#messages').append(cashTag(message.text))
         $('#messages').scrollTop($('#messages').prop('scrollHeight'))
     })
 
