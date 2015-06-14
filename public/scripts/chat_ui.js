@@ -12,6 +12,7 @@ $(document).ready(function() {
             message = result.message
 
         $('#messages').append(divEscapedContentElement(message))
+        scrollToBottom()
     })
 
     socket.on('featureResult', function(result){
@@ -23,11 +24,13 @@ $(document).ready(function() {
             mesage = result.message
 
         $('#messages').append(divEscapedSystemContent(message))
+        scrollToBottom()
     })
 
     socket.on('joinResult', function(result) {
         $('#room').text(result.room)
         $('#messages').append(divSystemContentElement('Room changed.'))
+        scrollToBottom()
     })
 
     socket.on('message', function(message) {
@@ -41,8 +44,10 @@ $(document).ready(function() {
 
         for (var room in rooms) {
             room = room.substring(1, room.length)
-            if (room != '')
+            if (room != '') {
                 $('#room-list').append(divEscapedContentElement(room))
+                scrollToBottom()
+            }
         }
 
         $('#room-list div').click(function() {
@@ -72,6 +77,12 @@ function divEscapedSystemContent(message) {
 function divSystemContentElement(message) {
     return $('<div></div>').html('<i>' + message + '</i>')
 }
+function div(content) {
+    return $('<div></div>').html(content)
+}
+function span(content) {
+    return $('<span></span>').text(content)
+}
 
 function processUserInput(chatApp, socket) {
     var message = $('#send-message').val(),
@@ -91,7 +102,7 @@ function processUserInput(chatApp, socket) {
 
     function normalMessage(message){
         chatApp.sendMessage($('#room').text(), message)
-        $('#messages').append(divEscapedContentElement(message))
+        $('#messages').append(cashTag(message))
         scrollToBottom()
     }
 
@@ -100,4 +111,26 @@ function processUserInput(chatApp, socket) {
 
 function scrollToBottom(){
     $('#messages').scrollTop($('#messages').prop('scrollHeight'))
+}
+
+function cashTag(message){
+    var div = $('<div></div>'),
+        temp = $('<div></div>')
+
+    message.split(/ +/).map(function(x){
+        if (!!x.match(/\$/))
+            return '<a href="javascript:;">' + temp.text(x).text() + '</a>'
+        else if (isUrl(x))
+            return '<a href="' + x + '">' + temp.text(x).text() + '</a>'
+        else return span(x)
+    }).forEach(function(x){
+        div.append(' ')
+        div.append(x)
+    })//.join(' ')
+
+    return div
+}
+
+function isUrl(url) {
+    return /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(url)
 }
