@@ -1,10 +1,11 @@
-var socketio = require('socket.io'),
-    fs = require('fs'),
+var socketio    = require('socket.io'),
+    _           = require('underscore'),
+    fs          = require('fs'),    
     io,
-    guestNumber = 1,
-    nickNames = {},
-    namesUsed = [],
-    currentRoom = {}
+    guestNumber     = 1,
+    nickNames       = {},
+    namesUsed       = [],
+    currentRoom     = {}
 
 exports.listen = function(server) {
     io = socketio.listen(server);
@@ -21,7 +22,7 @@ exports.listen = function(server) {
         handlRoomJoining(socket)
 
         socket.on('rooms', function() {
-            socket.emit('rooms', socket.rooms)
+            socket.emit('rooms', _.values(currentRoom))
         })
 
         handleClientDisconnection(socket, nickNames, namesUsed)
