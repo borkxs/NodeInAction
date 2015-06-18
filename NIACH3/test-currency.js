@@ -23,5 +23,5 @@ console.log(BrokenCurrency) // => empty object
 try { 
     var currency = new BrokenCurrency(canadianDollar)
 } catch ( e ) {
-    console.log( 'this is an empty exports objct )
+    console.log( 'this is an empty exports objct' )
 }
