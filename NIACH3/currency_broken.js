@@ -16,9 +16,11 @@ exports = Currency
 
 /*
 
-incorrect: node doesn't allow exports to be overwritten
+Annotation in the book says:
+"incorrect: node doesn't allow exports to be overwritten"
 
-it's like there's a 
+My suspicion is it's just setup as if the 
+following is executed before your code:
 
 var module = { exports: { } },
     exports = module.exports
