@@ -25,3 +25,11 @@ try {
 } catch ( e ) {
     console.log( 'this is an empty exports objct' )
 }
+
+/////////
+
+var ModuleCurrency = require('currency_module')
+
+console.log(ModuleCurrency)
+
+/////////
