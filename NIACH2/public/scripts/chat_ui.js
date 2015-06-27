@@ -19,7 +19,7 @@ $(document).ready(function() {
         var message
 
         if (result.success)
-            message = 'Feature Request: ' + message + '.'
+            message = 'Feature Request: ' + result.message + '.'
         else
             mesage = result.message
 
