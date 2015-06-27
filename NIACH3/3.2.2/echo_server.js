@@ -12,6 +12,7 @@ channel.on('join', function(id, client) {
             this.clients[id].write(message)
     }
     this.on('broadcast', channel.subscriptions[id])
+    channel.emit('broadcast', id, id + " has joined the chat.\n")
 })
 
 // subscribe client to broadcasts
@@ -25,6 +26,9 @@ var server = net.createServer(function(client) {
     channel.emit('join', id, client)
     client.on('data', function(data) {
         channel.emit('broadcast', id, data.toString())
+    })
+    client.on('close', function(){
+        channel.emit('leave', id)
     })
 })
 server.listen(8000)
