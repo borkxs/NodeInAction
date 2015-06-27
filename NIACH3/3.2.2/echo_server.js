@@ -1,5 +1,5 @@
 var events = require('events')
-net = require('net')
+    net = require('net')
 
 var channel = new events.EventEmitter()
 channel.clients = {}
