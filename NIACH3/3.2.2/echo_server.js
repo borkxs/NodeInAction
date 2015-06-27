@@ -6,6 +6,10 @@ channel.clients = {}
 channel.subscriptions = {}
 
 channel.on('join', function(id, client) {
+    var welcome = "Welcome!\n"
+            + 'Guests online: ' + this.listeners('broadcast').length
+    client.write(welcome + "\n")
+    
     this.clients[id] = client
     this.subscriptions[id] = function(senderId, message) {
         if (id != senderId)
