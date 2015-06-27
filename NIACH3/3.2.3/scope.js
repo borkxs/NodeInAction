@@ -4,10 +4,8 @@ function asyncFunction(callback) {
 
 var color = 'blue'
 
-;(function (color) {
-    asyncFunction(function() {
-        console.log('The color is ' + color)
-    })
-}(color))
+asyncFunction(function() {
+    console.log('The color is ' + color)
+})
 
 color = 'green'
