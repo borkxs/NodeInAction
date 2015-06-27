@@ -7,21 +7,15 @@ http.createServer(function(req, res) {
 
 function getTitles(res) {
     fs.readFile('./titles.json', function (err, data) {
-        if (err) {
-            hadError(err, res)
-        } else {
-            getTemplate(JSON.parse(data.toString()), res)
-        }
+        if (err) return hadError(err, res)
+        getTemplate(JSON.parse(data.toString()), res)
     })
 }
 
 function getTemplate(titles, res) {
     fs.readFile('./template.html', function (err, data) {
-        if (err) {
-            hadError(err, res)
-        } else {
-            formatHtml(titles, data.toString(), res)
-        }
+        if (err) return hadError(err, res)
+        formatHtml(titles, data.toString(), res)
     })
 }
 
