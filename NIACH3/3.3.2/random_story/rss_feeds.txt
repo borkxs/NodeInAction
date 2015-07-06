@@ -1,0 +1,2 @@
+https://github.com/joyent/node/commits/master.atom
+http://digg.com/rss/top.rss
